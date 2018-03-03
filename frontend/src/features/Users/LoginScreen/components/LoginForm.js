@@ -10,11 +10,12 @@ type Props = {
 
 class LoginForm extends React.Component<Props> {
   state = {
-    email: '',
-    password: ''
+    email: 'allain.lalonde@gmail.com',
+    password: 'pass'
   }
 
   render() {
+    const { error } = this.props
     const { email, password } = this.state
 
     return (
@@ -31,6 +32,7 @@ class LoginForm extends React.Component<Props> {
           onChange={this.onPasswordChange}
           placeholder="password"
         />
+        {error && <div className="error">{error}</div>}
         <button type="submit">Login</button>
       </form>
     )

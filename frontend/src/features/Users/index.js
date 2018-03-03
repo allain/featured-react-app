@@ -2,6 +2,8 @@ import React from 'react'
 
 import { Route } from 'react-router-dom'
 
+import Feature from '../../lib/Feature'
+
 import LoginScreen from './LoginScreen'
 
 const UserContent = () => (
@@ -12,7 +14,9 @@ const UserContent = () => (
 )
 
 export const render = () => (
-  <Route key="users-feature" path="/user/" component={UserContent} />
+  <Feature key="users" name="Users">
+    <Route path="/user/" component={UserContent} />
+  </Feature>
 )
 
 export * as reducers from './reducers'

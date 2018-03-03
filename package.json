@@ -50,7 +50,10 @@
   },
   "dependencies": {
     "eslint-plugin-standard": "^3.0.1",
-    "react-router-dom": "^4.2.2"
+    "history": "^4.7.2",
+    "propper": "^1.0.3",
+    "react-router-dom": "^4.2.2",
+    "react-router-redux": "^4.0.8"
   },
   "jest": {
     "transform": {
@@ -63,5 +66,13 @@
     "moduleDirectories": [
       "node_modules"
     ]
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/allain/featured-react-app.git"
+  },
+  "bugs": {
+    "url": "https://github.com/allain/featured-react-app/issues"
+  },
+  "homepage": "https://github.com/allain/featured-react-app#readme"
 }
