@@ -1,14 +1,19 @@
 import React from 'react'
 
 type Props = {
-  email: string,
-  password: string,
-  onLogin: void => any,
-  onEmailChange: string => any,
-  onPasswordChange: string => any
+  onLogin: ({
+    email: string,
+    password: string
+  }) => any,
+  error: string
 }
 
-class LoginForm extends React.Component<Props> {
+type State = {
+  email: string,
+  password: string
+}
+
+class LoginForm extends React.Component<Props, State> {
   state = {
     email: 'allain.lalonde@gmail.com',
     password: 'pass'
@@ -40,10 +45,7 @@ class LoginForm extends React.Component<Props> {
 
   onLogin = e => {
     e.preventDefault()
-    const { onLogin } = this.props
-    const { email, password } = this.state
-
-    onLogin && onLogin({ email, password })
+    this.props.onLogin(this.state)
   }
 
   onEmailChange = e => this.setState({ email: e.currentTarget.value })
