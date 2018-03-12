@@ -1,47 +1,57 @@
 import React from 'react'
 
 import { Route, Redirect, Link } from 'react-router-dom'
-import { Subscribe } from 'unstated'
 import Feature from '../../lib/Feature'
 import LoginScreen from './LoginScreen'
-import UserContainer from './state'
+import UsersState from './UsersState/UsersState'
 import { SpotContent } from 'react-spots'
+import { Need, Offer } from 'react-needs'
 
 export const render = () => (
-  <Feature key="users" name="Users">
-    <Subscribe to={[UserContainer]}>
-      {users => (
-        <React.Fragment>
-          {users.state.user ? (
-            <SpotContent
-              key="logout-button"
-              match="/header/top-right"
-              component={() => (
+  <Feature name="users">
+    <Offer name="users" value={() => new UsersState()} />
+    <SpotContent
+      key="logout-button"
+      match="/header/top-right"
+      component={() => (
+        <Need value={['users', 'history']}>
+          {(users: UsersState, history) => {
+            if (users.state.user)
+              return (
                 <div className="profile">
                   {users.state.user.email}
-                  <button onClick={users.logout}>Logout</button>
+                  <button
+                    className="ui compact button"
+                    onClick={() =>
+                      users.logout().then(() => history.replace('/'))
+                    }>
+                    Logout
+                  </button>
                 </div>
-              )}
-            />
-          ) : (
-            <SpotContent
-              key="login-button"
-              match="/header/top-right"
-              component={() => <Link to="/user/login">Login</Link>}
-            />
-          )}
-          <Route
-            path="/user"
-            render={() =>
-              users.state.user ? (
-                <Redirect to="/" />
-              ) : (
-                <Route path="/user/login" component={LoginScreen} />
               )
-            }
-          />
-        </React.Fragment>
+
+            console.log(history)
+
+            if (history.location.pathname === '/user/login') return null
+
+            return <Link to="/user/login">Login</Link>
+          }}
+        </Need>
       )}
-    </Subscribe>
+    />
+    <Route
+      path="/user"
+      render={() => (
+        <Need value="users">
+          {users =>
+            users.state.user ? (
+              <Redirect to="/" />
+            ) : (
+              <Route path="/user/login" component={LoginScreen} />
+            )
+          }
+        </Need>
+      )}
+    />
   </Feature>
 )

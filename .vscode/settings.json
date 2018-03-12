@@ -1,5 +1,7 @@
 {
     "javascript.validate.enable": false,
-    "eslint.autoFixOnSave": true,
-    "eslint.enable": true
+    "editor.formatOnSave": false,
+    "editor.formatOnType": false,
+    "eslint.enable": true,
+    "eslint.autoFixOnSave": true
 }

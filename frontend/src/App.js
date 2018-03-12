@@ -1,18 +1,24 @@
 import React from 'react'
-import { HashRouter as Router } from 'react-router-dom'
+import { Router } from 'react-router-dom'
 import * as features from './features'
+import AppState from './AppState/AppState'
+import { createHashHistory } from 'history'
 
-import { Provider as UnstatedProvider } from 'unstated'
+import { Scope, Offer } from 'react-needs'
 import { Spot, SpotProvider } from 'react-spots'
-import UserContainer from './features/Users/state'
+
+const history = createHashHistory()
 
 class App extends React.Component {
   render() {
     return (
       <SpotProvider>
-        <UnstatedProvider inject={[new UserContainer()]}>
-          <Router>
-            <div>
+        <Scope>
+          <Router history={history}>
+            <div className="ui container">
+              <Offer name="history" value={history} />
+              <Offer name="app" value={() => new AppState()} />
+
               <div style={{ float: 'right' }}>
                 <Spot name="/header/top-right" />
               </div>
@@ -20,7 +26,7 @@ class App extends React.Component {
               {Object.values(features).map(f => f.render())}
             </div>
           </Router>
-        </UnstatedProvider>
+        </Scope>
       </SpotProvider>
     )
   }

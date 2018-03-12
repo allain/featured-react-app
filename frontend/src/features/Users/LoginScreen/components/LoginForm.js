@@ -37,7 +37,7 @@ class LoginForm extends React.Component<Props, State> {
           onChange={this.onPasswordChange}
           placeholder="password"
         />
-        {error && <div className="error">{error}</div>}
+        {error && <div className="error">{error.message}</div>}
         <button type="submit">Login</button>
       </form>
     )

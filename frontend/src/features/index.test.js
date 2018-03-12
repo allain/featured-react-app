@@ -9,7 +9,6 @@ describe('features', () => {
   it('maps to valid features', () => {
     Object.values(features).forEach(f => {
       expect(f.render).toBeInstanceOf(Function)
-      expect(typeof f.reducers).toEqual('object')
     })
   })
 })

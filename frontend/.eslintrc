@@ -1,26 +1,25 @@
 {
   "parser": "babel-eslint",
-  "extends": "prettier-standard",
+  "extends": [
+    "prettier-standard"
+  ],
   "env": {
-    "browser": true,
-    "jest": true,
-    "jasmine": true
+    "es6": true,
+    "jest": true
   },
   "plugins": [
-    "babel",
-    "class-property",
-    "flowtype",
-    "json",
     "react"
   ],
-  "settings": {
-    "flowtype": {
-      "onlyFilesWithFlowAnnotation": false
-    }
+  "parserOptions": {
+    "sourceType": "module",
+    "allowImportExportEverywhere": true
   },
   "rules": {
+    "space-before-function-paren": 0,
+    "react/jsx-boolean-value": 0,
+    "import/first": 0,
     "react/jsx-uses-vars": "error",
     "react/jsx-uses-react": "error"
-  }
 
+  }
 }
